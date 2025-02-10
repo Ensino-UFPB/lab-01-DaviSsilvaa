@@ -1,1 +1,180 @@
 Coloque aqui todas as respostas das práticas indicadas no README.md
+
+
+Questão 1. route
+
+Qual a sua rede e máscara?
+
+Rede = 172.18.0.0
+
+Máscara = 255.255.0.0
+
+Qual o seu roteador padrão (default gateway)?
+
+172.18.0.1
+
+Quantas rotas configuradas tem seu computador?
+
+2 rotas configuradas
+
+Questão 2. ip
+
+Qual o IP da interface de rede?
+
+IP Interface de Rede = 172.18.0.2
+
+Qual a rede e a máscara?
+
+Nome da Rede = inet
+
+Máscara da rede netmask 255.255.0.0
+
+
+Qual o nome da interface de rede principal?
+
+Nome da interface = default via 172.18.0.1 dev eth0 
+
+
+Questão 3. nslookup 
+
+google
+
+Address: 172.217.29.196
+
+whitehouse
+
+Address: 192.0.66.51
+
+rnp
+
+Address: 104.18.27.22
+
+UFPB
+
+Address: 150.165.254.52
+
+
+Questão 4. ping
+
+
+Pingue a interface de loopback: ping 127.0.0.1. Qual o tempo de resposta?
+
+Entre 0.070 a 0.026 ms
+
+Pingue seu próprio endereço IP dentro do container. Qual o tempo de resposta?
+
+entre 0.068 ms a 0.043 ms
+
+ping www.ufpb.br
+
+entre 29ms a 41 ms
+
+ping www.yahoo.com
+
+entre 168ms a 170ms
+
+ping www.brasil.gov.br
+
+entre 76ms a 77ms
+
+ping www.dce.ufpb.br
+
+Está inacessível = ping: unknown host
+
+Analise os tempos de resposta:
+
+Compare os tempos de resposta para diferentes sites:
+ping www.google.com 57.318 ms
+ping www.rnp.br 58.254 ms
+ping www.whitehouse.gov 58.322 ms
+
+O que pode influenciar as diferenças nos tempos?
+
+As diferenças de ping pode ser pela questão de driver de rede, há diversos driver de rede, e cada um tem impactos diferentes de latência
+
+
+Questão 5. traceroute
+
+traceroute www.google.com
+
+traceroute www.rnp.br
+
+traceroute www.whitehouse.gov
+
+
+Por que alguns roteadores ao longo do caminho não respondem?
+
+Roteadores de alta performance
+
+Congestionamento ou sobrecarga da rede
+
+Políticas de segurança e firewalls
+
+Isso significa necessariamente que há um problema na rede?
+
+Não necessariamente, as vezes a falta de respostas não significa que há um problema na rede, pode indicar um problema quando se houver um aumento grande de latência, ou se o tracerouter parar andes de chegar ao destino
+
+Questão 6. netstat
+
+Liste todas as conexões e portas de escuta:
+
+TCP = 127.0.0.11:36443 - STATE = LISTEN
+
+UDP = 127.0.0.11:49321
+
+Mostre a tabela de roteamento:
+
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+default         172.18.0.1      0.0.0.0         UG        0 0          0 eth0
+172.18.0.0      0.0.0.0         255.255.0.0     U         0 0          0 eth0
+
+
+Os resultados são os mesmos do comando route?
+
+Sim os resultados são basicamente os mesmos! 
+
+o netstat -r exibe a tabela de roteamento em formato que venha ser mais amigável, porém com menos detalhes específicos
+
+já o route -n exibe a tabela de forma mais direta com foco em mostrar os endereços e mascaras de rede em formato numérico sem resolver os nomes dos hosts
+
+Há informações adicionais?
+
+Sim, no route -n é possível ver o valor de metric onde representar a prioridade de uma rota! onde o netstat -r não exibe
+
+
+Questão 7. telnet
+
+Teste a conectividade do servidor web na porta 80:
+
+
+telnet www.ufpb.br 80
+
+O servidor respondeu? O serviço está ativo?
+Sim está ativo Connected to www.ufpb.br.
+
+mais fecha logo em seguida pelo host 
+
+Connection closed by foreign host.
+
+telnet www.dce.ufpb.br 21
+
+Você conseguiu conexão? Se não, como diferenciar um problema de rede de um problema no serviço?
+
+Sem êxito na conexão! pelo jeito pode ser erro no nome do domínio, ou configuração de rede!
+
+
+Questão 8. mtr
+
+mtr www.google.com
+
+mtr www.ufpb.br
+
+
+O mtr é uma ferramenta de diagnóstico de rede que combina funcionalidades entre ping e traceroute! permiti monitorar o tempo real percorrido pelos pacotes de dados, trazendo mais informações detalhadas dos dados até um destino específico
+
+
+Situações em que o MTR é útil no gerenciamento de redes:
+
+1 = Monitoramento de desempenho da rede
+2 = Análise de rotas de tráfego
+
